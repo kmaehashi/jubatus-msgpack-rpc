@@ -176,6 +176,14 @@ bool future::is_finished() const
   return m_pimpl && m_pimpl->is_finished();
 }
 
+shared_session& future::session() const
+{
+  if (!m_pimpl) {
+    throw std::runtime_error("null future reference");
+  }
+  return m_pimpl->session();
+}
+
 }  // namespace rpc
 }  // namespace msgpack
 

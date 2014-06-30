@@ -62,6 +62,8 @@ public:
         void cancel();
         bool is_finished() const;
 
+    shared_session& session() const;
+
 	template <typename T>
 	class type;
 

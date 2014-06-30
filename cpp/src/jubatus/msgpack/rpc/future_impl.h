@@ -72,6 +72,10 @@ public:
         void cancel();
         bool is_finished() const;
 
+    shared_session& session() {
+        return m_session;
+    }
+
 private:
         msgid_t m_msgid;
 	shared_session m_session;

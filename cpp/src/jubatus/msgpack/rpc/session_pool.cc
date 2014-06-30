@@ -100,15 +100,17 @@ void session_pool_impl::step_timeout()
 		e.session->step_timeout(&timedout);
 		++it;
 	}
-	ref.reset();
 
 	if(!timedout.empty()) {
 		for(std::vector<shared_future>::iterator it(timedout.begin()),
 				it_end(timedout.end()); it != it_end; ++it) {
 			shared_future& f = *it;
 			f->set_result(object(), TIMEOUT_ERROR, auto_zone());
+            ref->erase(f->session()->get_address());
 		}
 	}
+
+	ref.reset();
 }
 
 void session_pool_impl::set_pool_time_limit(int limit_sec) {
